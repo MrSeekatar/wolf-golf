@@ -77,22 +77,20 @@ setup(names,bet,holes=18){
 
 setWolf(){
 
-    let index;
+    const remainder = this.holes % this.players.length;
+    const useLowestScore = remainder > 0 && this.hole > this.holes - remainder;
 
+    if(!useLowestScore){
 
-    if(this.hole<=16){
-
-        index=
-        (this.hole-1)
-        %
-        this.players.length;
+        const index =
+            (this.hole-1)
+            %
+            this.players.length;
 
         this.currentWolf =
             this.players[index].name;
 
     }
-
-
     else{
 
         const low =

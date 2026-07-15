@@ -3,7 +3,7 @@ Create a static web page app that can be hosted by GitHub that keeps track of wo
 At each hole show who is the wolf
 At each hole allow selecting the wolf's partner and the others, or the lone-wolf scenario.
 
-For holes 17 and 18, instead of using the rotation, the wolf will be the player who has the lowest score.
+For the final remainder of holes, when the total number of holes does not divide evenly by the number of players, instead of using the rotation, the wolf will be the player who has the lowest score.
 
 At the end of the 18 holes, show the scores and amount each payer owes or receives.
 

@@ -2,7 +2,7 @@
 
 Simple web page to keep track of golf scores for playing the Wolf game.
 
-The basic rules are as below. This has the variation to have the last player be the Wolf for holes 17 and 18, instead of using the rotation.
+The basic rules are as below. This has the variation to use the lowest-score player for the final remainder of holes when the total number of holes does not divide evenly by the number of players, instead of using the rotation.
 
 At the start of the game you select the number of players (3 or 4), their names, and the amount to bet for each hole. Default to 4 players and $0.25 per hole. It will randomize the order of play for the first hole. After you play each hole, enter who wins.
 

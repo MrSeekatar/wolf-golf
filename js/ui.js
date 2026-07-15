@@ -662,9 +662,7 @@ return `
 
 <div>
 
-${p.name}:
-${money>=0?"+":""}
-$${money}
+${p.name}: ${money>=0?"+":""}${money}
 
 </div>
 
