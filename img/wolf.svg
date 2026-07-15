@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 512 512">
+
+<path fill="#ffffff"
+d="M256 20
+L330 130
+430 90
+380 210
+470 290
+340 300
+300 470
+212 370
+120 470
+170 300
+42 290
+130 210
+80 90
+182 130z"/>
+
+<circle cx="195" cy="210" r="16" fill="#111"/>
+
+<circle cx="317" cy="210" r="16" fill="#111"/>
+
+<path d="M220 305
+Q256 340 292 305"
+
+stroke="#111"
+stroke-width="16"
+fill="none"
+stroke-linecap="round"/>
+
+</svg>
