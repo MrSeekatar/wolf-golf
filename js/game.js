@@ -22,6 +22,7 @@ constructor(){
     if(saved){
 
         Object.assign(this,saved);
+        this.holes = saved.holes ?? 18;
 
     }
     else{
@@ -29,6 +30,7 @@ constructor(){
         this.players=[];
         this.bet=.25;
         this.hole=1;
+        this.holes=18;
         this.history=[];
         this.currentWolf=null;
 
@@ -38,7 +40,9 @@ constructor(){
 
 
 
-setup(names,bet){
+setup(names,bet,holes=18){
+
+    const safeHoles = Math.min(30, Math.max(4, Number(holes) || 18));
 
     // Randomize player order at game start
     const shuffled = [...names];
@@ -59,6 +63,7 @@ setup(names,bet){
     this.bet=bet;
 
     this.hole=1;
+    this.holes=safeHoles;
 
     this.history=[];
 
@@ -165,7 +170,7 @@ completeHole(result){
 
     this.hole++;
 
-    if(this.hole<=18){
+    if(this.hole<=this.holes){
 
         this.setWolf();
 
@@ -194,7 +199,7 @@ leaderboard(){
 
 isFinished(){
 
-    return this.hole>18;
+    return this.hole>this.holes;
 
 }
 

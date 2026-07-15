@@ -39,6 +39,19 @@ Players
 
 
 <label>
+Holes
+</label>
+
+<input
+id="holes"
+type="number"
+min="4"
+max="30"
+step="1"
+value="18">
+
+
+<label>
 Bet per point
 </label>
 
@@ -81,6 +94,17 @@ document
 .value
 );
 
+const holeCount = Math.min(
+30,
+Math.max(
+4,
+Number(
+document
+.getElementById("holes")
+.value || 18
+)
+)
+);
 
 const names=[];
 
@@ -111,7 +135,8 @@ Number(
 document
 .getElementById("bet")
 .value
-)
+),
+holeCount
 );
 
 
@@ -175,7 +200,7 @@ this.game.currentWolf;
 
 
 const progress =
-((this.game.hole-1)/18)*100;
+((this.game.hole-1)/Math.max(1,this.game.holes))*100;
 
 
 this.app.innerHTML=`
