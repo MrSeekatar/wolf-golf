@@ -212,6 +212,13 @@ gap:12px;
 
 }
 
+.error{
+color:#ff8a80;
+margin-top:10px;
+min-height:1.2em;
+font-size:.95rem;
+}
+
 @media(min-width:650px){
 
 body{

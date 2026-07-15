@@ -1,3 +1,51 @@
+export function validatePlayerNames(names){
+
+const trimmed =
+    names.map(
+        name=>name.trim()
+    );
+
+
+for(const name of trimmed){
+
+    if(!name){
+
+        return {
+            valid:false,
+            message:"Please enter a name for every player."
+        };
+
+    }
+
+}
+
+
+const unique =
+    new Set(
+        trimmed.map(
+            name=>name.toLowerCase()
+        )
+    );
+
+
+if(unique.size !== trimmed.length){
+
+    return {
+        valid:false,
+        message:"Player names must be unique."
+    };
+
+}
+
+
+return {
+    valid:true,
+    message:""
+};
+
+}
+
+
 export class UI {
 
 constructor(game){
@@ -5,6 +53,8 @@ constructor(game){
     this.game = game;
     this.app =
         document.getElementById("app");
+    this.nameValidationTouched = false;
+    this.hasNameInput = false;
 
 }
 
@@ -62,6 +112,8 @@ step=".25"
 value=".25">
 
 
+<div id="nameError" class="error"></div>
+
 <button id="start">
 Mix & Start Game
 </button>
@@ -81,11 +133,15 @@ document
 ()=>this.updateNames();
 
 
-
+const startButton =
 document
-.getElementById("start")
-.onclick =
+.getElementById("start");
+
+startButton.onclick =
 ()=>{
+
+this.nameValidationTouched = true;
+this.hasNameInput = true;
 
 const count =
 Number(
@@ -111,23 +167,32 @@ const names=[];
 
 for(let i=1;i<=count;i++){
 
-let value =
+const value =
 document
 .getElementById(
 "name"+i
 )
-.value
-.trim();
-
-
-if(!value)
-value="Player "+i;
+.value;
 
 
 names.push(value);
 
 }
 
+
+const validation =
+validatePlayerNames(names);
+
+
+if(!validation.valid){
+
+this.setNameError(validation.message);
+return;
+
+}
+
+
+this.clearNameError();
 
 this.game.setup(
 names,
@@ -167,6 +232,7 @@ for(let i=1;i<=count;i++){
 html+=`
 
 <input
+class="playerName"
 id="name${i}"
 placeholder="Player name">
 
@@ -178,6 +244,125 @@ placeholder="Player name">
 document
 .getElementById("names")
 .innerHTML=html;
+
+
+const inputs =
+document
+.querySelectorAll(".playerName");
+
+
+inputs.forEach(input=>{
+
+input.addEventListener(
+"input",
+()=>{
+    this.hasNameInput = true;
+    this.updateStartButtonState();
+}
+);
+
+input.addEventListener(
+"change",
+()=>{
+    this.hasNameInput = true;
+    this.updateStartButtonState();
+}
+);
+
+});
+
+
+this.updateStartButtonState();
+
+}
+
+
+updateStartButtonState(){
+
+const count =
+Number(
+document
+.getElementById("players")
+.value
+);
+
+const names=[];
+
+
+for(let i=1;i<=count;i++){
+
+const value =
+document
+.getElementById(
+"name"+i
+)
+.value;
+
+
+names.push(value);
+
+}
+
+
+const validation =
+validatePlayerNames(names);
+
+const startButton =
+document
+.getElementById("start");
+
+startButton.disabled = false;
+
+
+if(this.hasNameInput || this.nameValidationTouched){
+
+if(!validation.valid){
+
+this.setNameError(validation.message);
+
+}
+else{
+
+this.clearNameError();
+
+}
+
+}
+else{
+
+this.clearNameError();
+
+}
+
+}
+
+
+setNameError(message){
+
+const error =
+document
+.getElementById("nameError");
+
+if(error){
+
+error.textContent = message;
+
+}
+
+}
+
+
+clearNameError(){
+
+const error =
+document
+.getElementById("nameError");
+
+if(error){
+
+error.textContent = "";
+
+}
 
 }
 
